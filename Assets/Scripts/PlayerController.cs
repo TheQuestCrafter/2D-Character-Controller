@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField]
-    float maxSpeed = 10f;
-    bool facingRight = true;
+    float maxSpeed = 10f, groundRadius = 0.2f, jumpForce = 700;
+    bool facingRight = true, grounded = false;
     [SerializeField]
     Rigidbody2D rb2d;
     [SerializeField]
     Animator anim;
+    [SerializeField]
+    Transform groundCheck;
+    [SerializeField]
+    LayerMask whatIsGround;
 
 
 	// Use this for initialization
@@ -18,6 +22,10 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+        anim.SetBool("Ground", grounded);
+        anim.SetFloat("verticalSpeed", rb2d.velocity.y);
+
         float move = Input.GetAxis("Horizontal");
         rb2d.AddForce(Vector2.right * move * maxSpeed);
         anim.SetFloat("Speed", Mathf.Abs(move));
@@ -33,6 +41,16 @@ public class PlayerController : MonoBehaviour {
             Flip();
         }
 	}
+
+    void Update()
+    {
+        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            anim.SetBool("Ground", false);
+            rb2d.AddForce(new Vector2(rb2d.velocity.x, jumpForce));
+        }
+    }
+
     void Flip()
     {
         facingRight = !facingRight;

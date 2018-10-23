@@ -395,6 +395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1271678545}
   - component: {fileID: 1271678544}
+  - component: {fileID: 1271678549}
   - component: {fileID: 1271678543}
   - component: {fileID: 1271678548}
   - component: {fileID: 1271678547}
@@ -542,3 +543,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.11}
   serializedVersion: 2
   m_Radius: 0.046066433
+--- !u!114 &1271678549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1271678542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e96c329a11eeb4b918aec3db1a1ebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 50
+  rb2d: {fileID: 1271678543}
+  anim: {fileID: 1271678546}
